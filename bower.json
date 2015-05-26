@@ -1,8 +1,8 @@
 {
-  "name": "jquery.easy-pie-chart",
+  "name": "angular.easy-pie-chart",
   "version": "2.1.7",
   "main": [
-    "dist/jquery.easypiechart.js"
+    "dist/angular.easypiechart.js"
   ],
   "ignore": [
     "demo",

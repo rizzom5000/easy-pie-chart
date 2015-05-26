@@ -7,29 +7,21 @@
  * @version 2.1.7
  **/
 
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define(["angular"], function (a0) {
-      return (factory(a0));
-    });
-  } else if (typeof exports === 'object') {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(require("angular"));
-  } else {
-    factory(angular);
-  }
-}(this, function (angular) {
-
+(function(root, factory) {
+    if(typeof exports === 'object') {
+        module.exports = factory(require('angular'));
+    }
+    else {
+        factory(root.angular);
+    }
+}(this, function(angular) {
 (function (angular) {
 
 	'use strict';
 
 	return angular.module('easypiechart', [])
 
-		.directive('easypiechart', [function() {
+		.directive('easyPieChart', [function() {
 			return {
 				restrict: 'AE',
 				require: '?ngModel',
@@ -71,7 +63,6 @@
 		}]);
 
 })(angular);
-
 /**
  * Renderer to render the chart on a canvas object
  * @param {DOMElement} el      DOM element to host the canvas (root of the plugin)
@@ -129,6 +120,9 @@ var CanvasRenderer = function(el, options) {
 		ctx.beginPath();
 		ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, isNegative);
 
+        ctx.fillStyle = "#fff";
+        ctx.fill();
+
 		ctx.strokeStyle = color;
 		ctx.lineWidth = lineWidth;
 
@@ -178,7 +172,7 @@ var CanvasRenderer = function(el, options) {
 	 */
 	var drawBackground = function() {
 		if(options.scaleColor) drawScale();
-		if(options.trackColor) drawCircle(options.trackColor, options.trackWidth || options.lineWidth, 1);
+		if(options.trackColor) drawCircle(options.trackColor, options.lineWidth, 1);
 	};
 
   /**
@@ -187,7 +181,7 @@ var CanvasRenderer = function(el, options) {
   this.getCanvas = function() {
     return canvas;
   };
-
+  
   /**
     * Canvas 2D context 'ctx' accessor
    */
@@ -271,7 +265,6 @@ var EasyPieChart = function(el, opts) {
 		scaleLength: 5,
 		lineCap: 'round',
 		lineWidth: 3,
-		trackWidth: undefined,
 		size: 110,
 		rotate: 0,
 		animate: {
@@ -397,6 +390,5 @@ var EasyPieChart = function(el, opts) {
 
 	init();
 };
-
 
 }));
